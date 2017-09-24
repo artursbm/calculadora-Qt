@@ -2,6 +2,7 @@
 #define CALCULATOR_H
 
 #include <QObject>
+#include <QtMath>
 
 class Calculator : public QObject
 {
@@ -11,7 +12,7 @@ public:
 
 public slots:
     void numEntered(int);
-    void constEntered(float);
+    void constEntered(QString);
 
     void clear();
     void allClear();
@@ -46,7 +47,7 @@ private:
     bool m_isSqrting = false;
     bool m_isSquaring = false;
     bool m_isCubing = false;
-    bool m_isEponenting = false;
+    bool m_isExponenting = false;
     bool m_isSining = false;
     bool m_isCosing = false;
     bool m_isTangenting = false;

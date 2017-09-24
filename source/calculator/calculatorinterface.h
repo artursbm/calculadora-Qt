@@ -2,7 +2,7 @@
 #define CALCULATORINTERFACE_H
 
 #include <QWidget>
-
+#include <QString>
 class Calculator;
 
 namespace Ui {

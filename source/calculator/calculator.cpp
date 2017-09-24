@@ -1,7 +1,20 @@
 #include "calculator.h"
 
 Calculator::Calculator(QObject *parent) :
-    QObject(parent), m_lastResult(0), m_currentNumber(0), m_isAdding(true), m_isMultiplying(true), m_isDividing(true)
+    QObject(parent), m_lastResult(0), m_currentNumber(0),
+    m_isAdding(true),
+    m_isMultiplying(true),
+    m_isDividing(true),
+    m_isSqrting(true),
+    m_isSquaring(true),
+    m_isCubing(true),
+    m_isExponenting(true),
+    m_isSining(true),
+    m_isCosing(true),
+    m_isTangenting(true),
+    m_isNeperloging(true),
+    m_isLoging(true),
+    m_isNeperexping(true)
 {
 }
 
@@ -11,9 +24,9 @@ void Calculator::numEntered(int num)
     emit displayChanged(QString::number(m_currentNumber));
 }
 
-void Calculator::constEntered(float num)
+void Calculator::constEntered(QString num)
 {
-    m_currentNumber = num;
+    m_currentNumber = num.toFloat();
     emit displayChanged(QString::number(m_currentNumber));
 }
 
@@ -27,7 +40,23 @@ void Calculator::allClear()
 {
     m_currentNumber = 0;
     m_lastResult = 0;
+    m_isAdding = false;
+    m_isSubtracting = false;
+    m_isMultiplying = false;
+    m_isDividing = false;
+    m_isSqrting = false;
+    m_isSquaring = false;
+    m_isCubing = false;
+    m_isExponenting = false;
+    m_isSining = false;
+    m_isCosing = false;
+    m_isTangenting = false;
+    m_isNeperloging = false;
+    m_isLoging = false;
+    m_isNeperexping = false;
+    calculate();
     emit displayChanged(QString::number(m_currentNumber));
+
 }
 
 void Calculator::additionMode()
@@ -59,37 +88,47 @@ void Calculator::sqrtMode() {
 
 void Calculator::squareMode() {
     calculate();
-    m_isSquare = true;
+    m_isSquaring = true;
 }
 
-void Calculator::divisionMode() {
+void Calculator::cubeMode() {
     calculate();
-    m_isDividing = true;
+    m_isCubing = true;
 }
 
-void Calculator::divisionMode() {
+void Calculator::exponentMode() {
     calculate();
-    m_isDividing = true;
+    m_isExponenting = true;
 }
 
-void Calculator::divisionMode() {
+void Calculator::sinMode() {
     calculate();
-    m_isDividing = true;
+    m_isSining = true;
 }
 
-void Calculator::divisionMode() {
+void Calculator::cosMode() {
     calculate();
-    m_isDividing = true;
+    m_isCosing = true;
 }
 
-void Calculator::divisionMode() {
+void Calculator::tgMode() {
     calculate();
-    m_isDividing = true;
+    m_isTangenting = true;
 }
 
-void Calculator::divisionMode() {
+void Calculator::neperlogMode() {
     calculate();
-    m_isDividing = true;
+    m_isNeperloging = true;
+}
+
+void Calculator::logMode() {
+    calculate();
+    m_isLoging = true;
+}
+
+void Calculator::neperexpMode() {
+    calculate();
+    m_isNeperexping = true;
 }
 
 void Calculator::calculate()
@@ -98,10 +137,31 @@ void Calculator::calculate()
     else if(m_isSubtracting)    m_lastResult -= m_currentNumber;
     else if(m_isMultiplying)    m_lastResult *= m_currentNumber;
     else if(m_isDividing)   m_lastResult /= m_currentNumber;
+    else if(m_isSqrting)   m_lastResult = qSqrt(m_lastResult);
+    else if(m_isSquaring)   m_lastResult = m_lastResult * m_lastResult;
+    else if(m_isCubing)   m_lastResult = m_lastResult * m_lastResult * m_lastResult;
+    else if(m_isExponenting)   m_lastResult = qPow(m_lastResult, m_currentNumber);
+    else if(m_isSining)   m_lastResult = qSin(m_lastResult);
+    else if(m_isCosing)   m_lastResult = qCos(m_lastResult);
+    else if(m_isTangenting)   m_lastResult = qTan(m_lastResult);
+    else if(m_isNeperloging)   m_lastResult = qLn(m_lastResult);
+    else if(m_isLoging)   m_lastResult = qLn(m_lastResult)/ M_LN10;
+    else if(m_isNeperexping)   m_lastResult = qPow(M_E,m_lastResult);
     m_currentNumber = 0;
     m_isAdding = false;
     m_isSubtracting = false;
     m_isMultiplying = false;
     m_isDividing = false;
+    m_isSqrting = false;
+    m_isSquaring = false;
+    m_isCubing = false;
+    m_isExponenting = false;
+    m_isSining = false;
+    m_isCosing = false;
+    m_isTangenting = false;
+    m_isNeperloging = false;
+    m_isLoging = false;
+    m_isNeperexping = false;
+
     emit displayChanged(QString::number(m_lastResult));
 }

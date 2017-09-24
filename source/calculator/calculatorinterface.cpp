@@ -44,6 +44,13 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
     connect(ui->buttonNine,SIGNAL(clicked()), m,SLOT(map()));
     m->setMapping(ui->buttonNine,9);
 
+    connect(ui->buttonPi,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonPi,QString::number(M_PI));
+
+    connect(ui->buttonNeper,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonNeper,QString::number(M_E));
+
+
     // Adição e Subtração:
     connect(ui->buttonAdd, SIGNAL(clicked()),
         m_calculator, SLOT(additionMode()));
@@ -55,12 +62,45 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
     connect(ui->buttonDivide, SIGNAL(clicked()),
         m_calculator, SLOT(divisionMode()));
 
+    //Funções científicas
+
+    connect(ui->buttonSqrt, SIGNAL(clicked()),
+        m_calculator, SLOT(sqrtMode()));
+
+    connect(ui->buttonSqr, SIGNAL(clicked()),
+        m_calculator, SLOT(squareMode()));
+
+    connect(ui->buttonCube, SIGNAL(clicked()),
+        m_calculator, SLOT(cubeMode()));
+
+    connect(ui->buttonExp, SIGNAL(clicked()),
+        m_calculator, SLOT(exponentMode()));
+
+    connect(ui->buttonSin, SIGNAL(clicked()),
+        m_calculator, SLOT(sinMode()));
+
+    connect(ui->buttonCos, SIGNAL(clicked()),
+        m_calculator, SLOT(cosMode()));
+
+    connect(ui->buttonTg, SIGNAL(clicked()),
+        m_calculator, SLOT(tgMode()));
+
+    connect(ui->buttonLn, SIGNAL(clicked()),
+        m_calculator, SLOT(neperlogMode()));
+
+    connect(ui->buttonLog, SIGNAL(clicked()),
+        m_calculator, SLOT(logMode()));
+
+    connect(ui->buttonNeperexp, SIGNAL(clicked()),
+        m_calculator, SLOT(neperexpMode()));
+
     // CALCULATE
     connect(ui->buttonCalculate, SIGNAL(clicked()),
         m_calculator, SLOT(calculate()));
 
     // map de numero para numero digitado, e deste para a entryScreen
     connect(m, SIGNAL(mapped(int)), m_calculator, SLOT(numEntered(int)));
+    connect(m, SIGNAL(mapped(const QString)), m_calculator, SLOT(constEntered(QString)));
     connect(m_calculator, SIGNAL(displayChanged(QString)),
         ui->entryScreen, SLOT(setText(QString)));
 
