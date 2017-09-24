@@ -7,6 +7,8 @@ Calculator::Calculator(QObject *parent) :
 
 void Calculator::numEntered(int num)
 {
+
+
     m_currentNumber = m_currentNumber*10 + num;
     emit displayChanged(QString::number(m_currentNumber));
 }

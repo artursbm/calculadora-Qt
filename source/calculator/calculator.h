@@ -26,8 +26,8 @@ signals:
     void displayChanged(QString);
 
 private:
-    int m_lastResult;
-    int m_currentNumber;
+    double m_lastResult;
+    double m_currentNumber;
     bool m_isAdding;
     bool m_isMultiplying;
     bool m_isDividing;

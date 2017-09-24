@@ -311,5 +311,22 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>radioScientific</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>CalculatorInterface</receiver>
+   <slot>showFullScreen()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>258</x>
+     <y>86</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>177</x>
+     <y>193</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
