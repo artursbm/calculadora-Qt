@@ -7,8 +7,6 @@ Calculator::Calculator(QObject *parent) :
 
 void Calculator::numEntered(int num)
 {
-
-
     m_currentNumber = m_currentNumber*10 + num;
     emit displayChanged(QString::number(m_currentNumber));
 }
@@ -30,13 +28,12 @@ void Calculator::additionMode()
 {
     calculate();
     m_isAdding = true;
-
 }
 
 void Calculator::subtractionMode()
 {
     calculate();
-    m_isAdding = false;
+    m_isSubtracting = true;
 }
 
 void Calculator::multiplicationMode() {
@@ -51,7 +48,14 @@ void Calculator::divisionMode() {
 
 void Calculator::calculate()
 {
-    m_lastResult += m_isAdding?m_currentNumber:-m_currentNumber;
+    if(m_isAdding)  m_lastResult += m_currentNumber;
+    else if(m_isSubtracting)    m_lastResult -= m_currentNumber;
+    else if(m_isMultiplying)    m_lastResult *= m_currentNumber;
+    else if(m_isDividing)   m_lastResult /= m_currentNumber;
     m_currentNumber = 0;
+    m_isAdding = false;
+    m_isSubtracting = false;
+    m_isMultiplying = false;
+    m_isDividing = false;
     emit displayChanged(QString::number(m_lastResult));
 }
