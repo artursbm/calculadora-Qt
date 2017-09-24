@@ -26,11 +26,12 @@ signals:
     void displayChanged(QString);
 
 private:
-    int m_lastResult;
-    int m_currentNumber;
-    bool m_isAdding;
-    bool m_isMultiplying;
-    bool m_isDividing;
+    double m_lastResult;
+    double m_currentNumber;
+    bool m_isAdding = false;
+    bool m_isSubtracting = false;
+    bool m_isMultiplying = false;
+    bool m_isDividing = false;
 };
 
 #endif // CALCULATOR_H
