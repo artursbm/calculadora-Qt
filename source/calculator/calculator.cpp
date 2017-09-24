@@ -11,6 +11,12 @@ void Calculator::numEntered(int num)
     emit displayChanged(QString::number(m_currentNumber));
 }
 
+void Calculator::constEntered(float num)
+{
+    m_currentNumber = num;
+    emit displayChanged(QString::number(m_currentNumber));
+}
+
 void Calculator::clear()
 {
     m_currentNumber = 0;
@@ -39,6 +45,46 @@ void Calculator::subtractionMode()
 void Calculator::multiplicationMode() {
     calculate();
     m_isMultiplying = true;
+}
+
+void Calculator::divisionMode() {
+    calculate();
+    m_isDividing = true;
+}
+
+void Calculator::sqrtMode() {
+    calculate();
+    m_isSqrting = true;
+}
+
+void Calculator::squareMode() {
+    calculate();
+    m_isSquare = true;
+}
+
+void Calculator::divisionMode() {
+    calculate();
+    m_isDividing = true;
+}
+
+void Calculator::divisionMode() {
+    calculate();
+    m_isDividing = true;
+}
+
+void Calculator::divisionMode() {
+    calculate();
+    m_isDividing = true;
+}
+
+void Calculator::divisionMode() {
+    calculate();
+    m_isDividing = true;
+}
+
+void Calculator::divisionMode() {
+    calculate();
+    m_isDividing = true;
 }
 
 void Calculator::divisionMode() {
