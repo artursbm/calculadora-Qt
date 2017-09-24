@@ -14,7 +14,6 @@ public slots:
 
     void clear();
     void allClear();
-
     void additionMode();
     void subtractionMode();
     void multiplicationMode();
@@ -28,6 +27,7 @@ signals:
 private:
     double m_lastResult;
     double m_currentNumber;
+    double m_leftNumber;
     bool m_isAdding = false;
     bool m_isSubtracting = false;
     bool m_isMultiplying = false;

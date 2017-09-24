@@ -13,7 +13,7 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
 
     QSignalMapper *m = new QSignalMapper(this);
 
-    // map de número pressionado para inteiro.
+    // map de número ou ponto pressionado para inteiro.
     connect(ui->buttonZero,SIGNAL(clicked()), m,SLOT(map()));
     m->setMapping(ui->buttonZero,0);
 
@@ -60,7 +60,9 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
         m_calculator, SLOT(calculate()));
 
     // map de numero para numero digitado, e deste para a entryScreen
-    connect(m, SIGNAL(mapped(int)), m_calculator, SLOT(numEntered(int)));
+    connect(m, SIGNAL(mapped(int)),
+        m_calculator, SLOT(numEntered(int)));
+
     connect(m_calculator, SIGNAL(displayChanged(QString)),
         ui->entryScreen, SLOT(setText(QString)));
 
