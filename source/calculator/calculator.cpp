@@ -3,6 +3,7 @@
 Calculator::Calculator(QObject *parent) :
     QObject(parent), m_lastResult(0), m_currentNumber(0),
     m_isAdding(true),
+    m_isSubtracting(true),
     m_isMultiplying(true),
     m_isDividing(true),
     m_isSqrting(true),
@@ -16,6 +17,42 @@ Calculator::Calculator(QObject *parent) :
     m_isLoging(true),
     m_isNeperexping(true)
 {
+}
+
+void Calculator::setAllOp(){
+    m_isEqual = true;
+    m_isAdding = true;
+    m_isSubtracting = true;
+    m_isMultiplying = true;
+    m_isDividing = true;
+    m_isSqrting = true;
+    m_isSquaring = true;
+    m_isCubing = true;
+    m_isExponenting = true;
+    m_isSining = true;
+    m_isCosing = true;
+    m_isTangenting = true;
+    m_isNeperloging = true;
+    m_isLoging = true;
+    m_isNeperexping = true;
+}
+
+void Calculator::resetAllOp(){
+    m_isEqual = false;
+    m_isAdding  = false;
+    m_isSubtracting  = false;
+    m_isMultiplying  = false;
+    m_isDividing  = false;
+    m_isSqrting  = false;
+    m_isSquaring  = false;
+    m_isCubing  = false;
+    m_isExponenting  = false;
+    m_isSining  = false;
+    m_isCosing  = false;
+    m_isTangenting  = false;
+    m_isNeperloging  = false;
+    m_isLoging  = false;
+    m_isNeperexping  = false;
 }
 
 void Calculator::numEntered(int num)
@@ -33,6 +70,7 @@ void Calculator::constEntered(QString num)
 void Calculator::clear()
 {
     m_currentNumber = 0;
+    setAllOp();
     emit displayChanged(QString::number(m_currentNumber));
 }
 
@@ -40,24 +78,20 @@ void Calculator::allClear()
 {
     m_currentNumber = 0;
     m_lastResult = 0;
-    m_isAdding = false;
-    m_isSubtracting = false;
-    m_isMultiplying = false;
-    m_isDividing = false;
-    m_isSqrting = false;
-    m_isSquaring = false;
-    m_isCubing = false;
-    m_isExponenting = false;
-    m_isSining = false;
-    m_isCosing = false;
-    m_isTangenting = false;
-    m_isNeperloging = false;
-    m_isLoging = false;
-    m_isNeperexping = false;
-    calculate();
+    setAllOp();
     emit displayChanged(QString::number(m_currentNumber));
 
 }
+
+void Calculator::equalMode()
+{
+    calculate();
+    m_isEqual = true;
+    setAllOp();
+    m_currentNumber = 0;
+    m_lastResult = 0;
+}
+
 
 void Calculator::additionMode()
 {
@@ -148,20 +182,7 @@ void Calculator::calculate()
     else if(m_isLoging)   m_lastResult = qLn(m_lastResult)/ M_LN10;
     else if(m_isNeperexping)   m_lastResult = qPow(M_E,m_lastResult);
     m_currentNumber = 0;
-    m_isAdding = false;
-    m_isSubtracting = false;
-    m_isMultiplying = false;
-    m_isDividing = false;
-    m_isSqrting = false;
-    m_isSquaring = false;
-    m_isCubing = false;
-    m_isExponenting = false;
-    m_isSining = false;
-    m_isCosing = false;
-    m_isTangenting = false;
-    m_isNeperloging = false;
-    m_isLoging = false;
-    m_isNeperexping = false;
+    resetAllOp();
 
     emit displayChanged(QString::number(m_lastResult));
 }

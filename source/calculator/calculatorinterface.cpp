@@ -96,7 +96,7 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
 
     // CALCULATE
     connect(ui->buttonCalculate, SIGNAL(clicked()),
-        m_calculator, SLOT(calculate()));
+        m_calculator, SLOT(equalMode()));
 
     // map de numero para numero digitado, e deste para a entryScreen
     connect(m, SIGNAL(mapped(int)), m_calculator, SLOT(numEntered(int)));

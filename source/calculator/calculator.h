@@ -16,6 +16,7 @@ public slots:
 
     void clear();
     void allClear();
+    void equalMode();
 
     void additionMode();
     void subtractionMode();
@@ -38,8 +39,12 @@ signals:
     void displayChanged(QString);
 
 private:
+
+    void setAllOp();
+    void resetAllOp();
     double m_lastResult;
     double m_currentNumber;
+    bool m_isEqual = false;
     bool m_isAdding = false;
     bool m_isSubtracting = false;
     bool m_isMultiplying = false;
