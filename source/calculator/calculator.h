@@ -1,4 +1,4 @@
-#ifndef CALCULATOR_H
+﻿#ifndef CALCULATOR_H
 #define CALCULATOR_H
 
 #include <QObject>
@@ -11,8 +11,9 @@ public:
     explicit Calculator(QObject *parent = 0);
 
 public slots:
-    void numEntered(int);
+    void numEntered(QString);
     void constEntered(QString);
+    //void decimalMode(QString);
 
     void clear();
     void allClear();
@@ -32,14 +33,14 @@ public slots:
     void neperlogMode();
     void logMode();
     void neperexpMode();
-
+    void signalMode();
     void calculate();
 
 signals:
     void displayChanged(QString);
 
 private:
-
+    QString m_numAux = "";
     void setAllOp();
     void resetAllOp();
     double m_lastResult;
@@ -59,6 +60,7 @@ private:
     bool m_isNeperloging = false;
     bool m_isLoging = false;
     bool m_isNeperexping = false;
+    bool m_isDecimal = false;
 
 };
 

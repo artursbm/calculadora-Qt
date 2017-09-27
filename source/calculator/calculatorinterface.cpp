@@ -15,40 +15,56 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
 
     // map de número pressionado para inteiro.
     connect(ui->buttonZero,SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonZero,0);
+    m->setMapping(ui->buttonZero,QString::number(0));
+
 
     connect(ui->buttonOne,SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonOne,1);
+    m->setMapping(ui->buttonOne,QString::number(1));
+
 
     connect(ui->buttonTwo,SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonTwo,2);
+    m->setMapping(ui->buttonTwo,QString::number(2));
+
 
     connect(ui->buttonThree,SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonThree,3);
+    m->setMapping(ui->buttonThree,QString::number(3));
+
 
     connect(ui->buttonFour,SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonFour,4);
+    m->setMapping(ui->buttonFour,QString::number(4));
 
     connect(ui->buttonFive,SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonFive,5);
+    m->setMapping(ui->buttonFive,QString::number(5));
+
 
     connect(ui->buttonSix,SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonSix,6);
+    m->setMapping(ui->buttonSix,QString::number(6));
+
 
     connect(ui->buttonSeven,SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonSeven,7);
+    m->setMapping(ui->buttonSeven,QString::number(7));
+
 
     connect(ui->buttonEight,SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonEight,8);
+    m->setMapping(ui->buttonEight,QString::number(8));
+
 
     connect(ui->buttonNine,SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonNine,9);
+    m->setMapping(ui->buttonNine,QString::number(9));
+
 
     connect(ui->buttonPi,SIGNAL(clicked()), m,SLOT(map()));
     m->setMapping(ui->buttonPi,QString::number(M_PI));
 
     connect(ui->buttonNeper,SIGNAL(clicked()), m,SLOT(map()));
     m->setMapping(ui->buttonNeper,QString::number(M_E));
+
+    connect(ui->buttonDecimal, SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonDecimal,".");
+
+    // Sinal negativo
+    connect(ui->buttonSignal, SIGNAL(clicked()),
+        m_calculator, SLOT(signalMode()));
 
 
     // Adição e Subtração:
@@ -98,8 +114,9 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
     connect(ui->buttonCalculate, SIGNAL(clicked()),
         m_calculator, SLOT(equalMode()));
 
+
     // map de numero para numero digitado, e deste para a entryScreen
-    connect(m, SIGNAL(mapped(int)), m_calculator, SLOT(numEntered(int)));
+    connect(m, SIGNAL(mapped(const QString)), m_calculator, SLOT(numEntered(QString)));
     connect(m, SIGNAL(mapped(const QString)), m_calculator, SLOT(constEntered(QString)));
     connect(m_calculator, SIGNAL(displayChanged(QString)),
         ui->entryScreen, SLOT(setText(QString)));

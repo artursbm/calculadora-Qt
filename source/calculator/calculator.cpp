@@ -15,7 +15,8 @@ Calculator::Calculator(QObject *parent) :
     m_isTangenting(true),
     m_isNeperloging(true),
     m_isLoging(true),
-    m_isNeperexping(true)
+    m_isNeperexping(true),
+    m_isDecimal(false)
 {
 }
 
@@ -53,11 +54,34 @@ void Calculator::resetAllOp(){
     m_isNeperloging  = false;
     m_isLoging  = false;
     m_isNeperexping  = false;
+    m_isDecimal = false;
 }
 
-void Calculator::numEntered(int num)
+void Calculator::numEntered(QString num)
 {
-    m_currentNumber = m_currentNumber*10 + num;
+
+     m_numAux = QString::number(m_currentNumber);
+     if(!m_isDecimal && num =="."){
+        m_numAux += ".";
+        m_isDecimal = true;
+     }
+     else if (num != "."){
+       m_numAux += num;
+
+     }
+     m_currentNumber = m_numAux.toFloat();
+     emit displayChanged(m_numAux);
+}
+
+//void Calculator::decimalMode(QString num) {
+//    QString currentNumber = QString::number(m_currentNumber);
+//    QString result = strcat(currentNumber, ".");
+//    result = strcat(result, num);
+//    emit displayChanged(QString::number(result));
+//}
+
+void Calculator::signalMode() {
+    m_currentNumber = -m_currentNumber;
     emit displayChanged(QString::number(m_currentNumber));
 }
 
