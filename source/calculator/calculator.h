@@ -46,6 +46,7 @@ private:
     double m_lastResult;
     double m_currentNumber;
     bool m_isEqual = false;
+    bool m_isFirstTime = true;
     bool m_isAdding = false;
     bool m_isSubtracting = false;
     bool m_isMultiplying = false;

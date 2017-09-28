@@ -16,7 +16,8 @@ Calculator::Calculator(QObject *parent) :
     m_isNeperloging(true),
     m_isLoging(true),
     m_isNeperexping(true),
-    m_isDecimal(false)
+    m_isDecimal(false),
+    m_isFirstTime(true)
 {
 }
 
@@ -36,6 +37,8 @@ void Calculator::setAllOp(){
     m_isNeperloging = true;
     m_isLoging = true;
     m_isNeperexping = true;
+    m_isDecimal = false;
+    m_isFirstTime = true;
 }
 
 void Calculator::resetAllOp(){
@@ -55,22 +58,27 @@ void Calculator::resetAllOp(){
     m_isLoging  = false;
     m_isNeperexping  = false;
     m_isDecimal = false;
+    m_isFirstTime = true;
 }
 
 void Calculator::numEntered(QString num)
 {
 
-     m_numAux = QString::number(m_currentNumber);
-     if(!m_isDecimal && num =="."){
+    if (m_isFirstTime){
+        m_numAux = "";
+        m_isFirstTime = false;
+    }
+
+    if(!m_isDecimal && num =="."){
         m_numAux += ".";
         m_isDecimal = true;
-     }
-     else if (num != "."){
-       m_numAux += num;
+    }
+    else if (num != "."){
+        m_numAux += num;
 
-     }
-     m_currentNumber = m_numAux.toFloat();
-     emit displayChanged(m_numAux);
+    }
+    m_currentNumber = m_numAux.toFloat();
+    emit displayChanged(m_numAux);
 }
 
 //void Calculator::decimalMode(QString num) {
@@ -87,8 +95,9 @@ void Calculator::signalMode() {
 
 void Calculator::constEntered(QString num)
 {
+    m_numAux = "";
     m_currentNumber = num.toFloat();
-    emit displayChanged(QString::number(m_currentNumber));
+    emit displayChanged(QString::number(m_currentNumber,'f',10));
 }
 
 void Calculator::clear()
