@@ -94,12 +94,13 @@ void Calculator::signalMode() {
     emit displayChanged(QString::number(m_currentNumber));
 }
 
-//void Calculator::constEntered(QString num)
-//{
-//    m_numAux = "";
-//    m_currentNumber = num.toFloat();
-//    emit displayChanged(QString::number(m_currentNumber,'f',10));
-//}
+// Método que mapeia o botão de constantes (PI ou e),
+// enviando para a tela o valor da constante apertada.
+void Calculator::constEntered(QString num) {
+    m_numAux = "";
+    m_currentNumber = num.toFloat();
+    emit displayChanged(QString::number(m_currentNumber,'f',10));
+}
 
 // Método chamado ao se pressionar o botão [CLEAR]
 // irá limpar a tela, mas manterá o último resultado na

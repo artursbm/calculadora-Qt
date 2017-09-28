@@ -58,43 +58,43 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
 // -------- Setup de botões numéricos no modo científico -------- //
     // conectando os botões do modo científico:
     // map de número pressionado para inteiro.
-    connect(ui->buttonZero_2,SIGNAL(clicked()), c,SLOT(map()));
-    c->setMapping(ui->buttonZero_2,QString::number(0));
+    connect(ui->buttonZero_2,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonZero_2,QString::number(0));
 
 
-    connect(ui->buttonOne_2,SIGNAL(clicked()), c,SLOT(map()));
-    c->setMapping(ui->buttonOne_2,QString::number(1));
+    connect(ui->buttonOne_2,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonOne_2,QString::number(1));
 
 
-    connect(ui->buttonTwo_2,SIGNAL(clicked()), c,SLOT(map()));
-    c->setMapping(ui->buttonTwo_2,QString::number(2));
+    connect(ui->buttonTwo_2,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonTwo_2,QString::number(2));
 
 
-    connect(ui->buttonThree_2,SIGNAL(clicked()), c,SLOT(map()));
-    c->setMapping(ui->buttonThree_2,QString::number(3));
+    connect(ui->buttonThree_2,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonThree_2,QString::number(3));
 
 
-    connect(ui->buttonFour_2,SIGNAL(clicked()), c,SLOT(map()));
-    c->setMapping(ui->buttonFour_2,QString::number(4));
+    connect(ui->buttonFour_2,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonFour_2,QString::number(4));
 
-    connect(ui->buttonFive_2,SIGNAL(clicked()), c,SLOT(map()));
-    c->setMapping(ui->buttonFive_2,QString::number(5));
-
-
-    connect(ui->buttonSix_2,SIGNAL(clicked()), c,SLOT(map()));
-    c->setMapping(ui->buttonSix_2,QString::number(6));
+    connect(ui->buttonFive_2,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonFive_2,QString::number(5));
 
 
-    connect(ui->buttonSeven_2,SIGNAL(clicked()), c,SLOT(map()));
-    c->setMapping(ui->buttonSeven_2,QString::number(7));
+    connect(ui->buttonSix_2,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonSix_2,QString::number(6));
 
 
-    connect(ui->buttonEight_2,SIGNAL(clicked()), c,SLOT(map()));
-    c->setMapping(ui->buttonEight_2,QString::number(8));
+    connect(ui->buttonSeven_2,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonSeven_2,QString::number(7));
 
 
-    connect(ui->buttonNine_2,SIGNAL(clicked()), c,SLOT(map()));
-    c->setMapping(ui->buttonNine_2,QString::number(9));
+    connect(ui->buttonEight_2,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonEight_2,QString::number(8));
+
+
+    connect(ui->buttonNine_2,SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonNine_2,QString::number(9));
 
     connect(ui->buttonPi,SIGNAL(clicked()), c,SLOT(map()));
     c->setMapping(ui->buttonPi,QString::number(M_PI));
@@ -102,10 +102,16 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
     connect(ui->buttonNeper,SIGNAL(clicked()), c,SLOT(map()));
     c->setMapping(ui->buttonNeper,QString::number(M_E));
 
+// ----------------------------------------------------------------- //
+
+    // conectando o botão [.] de decimal
     connect(ui->buttonDecimal, SIGNAL(clicked()), m,SLOT(map()));
     m->setMapping(ui->buttonDecimal,".");
 
-// ----------------------------------------------------------------- //
+    connect(ui->buttonDecimal_2, SIGNAL(clicked()), m,SLOT(map()));
+    m->setMapping(ui->buttonDecimal,".");
+
+
 
     // botão de Sinal negativo em ambos os modos:
     connect(ui->buttonSignal, SIGNAL(clicked()),
@@ -176,9 +182,7 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
 
     // map de numero para numero digitado, e deste para a entryScreen
     connect(m, SIGNAL(mapped(QString)), m_calculator, SLOT(numEntered(QString)));
-    connect(c, SIGNAL(mapped(QString)), m_calculator, SLOT(numEntered(QString)));
-
-    //connect(c, SIGNAL(mapped(const QString)), m_calculator, SLOT(constEntered(QString)));
+    connect(c, SIGNAL(mapped(const QString)), m_calculator, SLOT(constEntered(QString)));
     connect(m_calculator, SIGNAL(displayChanged(QString)),
         ui->entryScreen, SLOT(setText(QString)));
 

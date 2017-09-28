@@ -11,9 +11,9 @@ public:
     explicit Calculator(QObject *parent = 0);
 
 public slots:
-    // Método para colocar números clicados na tela EntryScreen
+    // Método para colocar números ou constantes clicados na tela EntryScreen
     void numEntered(QString);
-    //void constEntered(QString);
+    void constEntered(QString);
 
     // Método para limpar a tela
     void clear();
