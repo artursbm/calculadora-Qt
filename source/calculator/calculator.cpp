@@ -18,10 +18,11 @@ Calculator::Calculator(QObject *parent) :
     m_isNeperexping(true),
     m_isDecimal(false),
     m_isFirstTime(true)
-{
-}
+{}
 
-void Calculator::setAllOp(){
+// Método chamado dentro de Calculator::clear() ou Calculator::equalMode();
+// Todos os verificadores de operação são setados para 'true'.
+void Calculator::setAllOp() {
     m_isEqual = true;
     m_isAdding = true;
     m_isSubtracting = true;
@@ -41,7 +42,10 @@ void Calculator::setAllOp(){
     m_isFirstTime = true;
 }
 
-void Calculator::resetAllOp(){
+// Método chamado ao fim de Calculator::calculate(), ou seja,
+// após o término da operação realizada, todos os verificadores
+// de operação são setados para 'false', resetando as operações.
+void Calculator::resetAllOp() {
     m_isEqual = false;
     m_isAdding  = false;
     m_isSubtracting  = false;
@@ -61,8 +65,10 @@ void Calculator::resetAllOp(){
     m_isFirstTime = true;
 }
 
-void Calculator::numEntered(QString num)
-{
+// Função que transforma o valor do botão numérico ou de constante
+// pressionado na calculadora para um valor que será mostrado
+// corretamente na EntryScreen.
+void Calculator::numEntered(QString num) {
 
     if (m_isFirstTime){
         m_numAux = "";
@@ -81,34 +87,33 @@ void Calculator::numEntered(QString num)
     emit displayChanged(m_numAux);
 }
 
-//void Calculator::decimalMode(QString num) {
-//    QString currentNumber = QString::number(m_currentNumber);
-//    QString result = strcat(currentNumber, ".");
-//    result = strcat(result, num);
-//    emit displayChanged(QString::number(result));
-//}
-
+// Método acionado quando o botão [+/-] é pressionado
+// mudando o sinal do operador atual mostrado na tela.
 void Calculator::signalMode() {
     m_currentNumber = -m_currentNumber;
     emit displayChanged(QString::number(m_currentNumber));
 }
 
-void Calculator::constEntered(QString num)
-{
-    m_numAux = "";
-    m_currentNumber = num.toFloat();
-    emit displayChanged(QString::number(m_currentNumber,'f',10));
-}
+//void Calculator::constEntered(QString num)
+//{
+//    m_numAux = "";
+//    m_currentNumber = num.toFloat();
+//    emit displayChanged(QString::number(m_currentNumber,'f',10));
+//}
 
-void Calculator::clear()
-{
+// Método chamado ao se pressionar o botão [CLEAR]
+// irá limpar a tela, mas manterá o último resultado na
+// memória.
+void Calculator::clear() {
     m_currentNumber = 0;
     setAllOp();
     emit displayChanged(QString::number(m_currentNumber));
 }
 
-void Calculator::allClear()
-{
+// Método chamado ao se pressionar o botão [AC];
+// limpa a tela e a memória, zerando inclusive o último
+// resultado armazenado.
+void Calculator::allClear() {
     m_currentNumber = 0;
     m_lastResult = 0;
     setAllOp();
@@ -116,90 +121,121 @@ void Calculator::allClear()
 
 }
 
-void Calculator::equalMode()
-{
+// Método chamado ao se pressionar o botão [=];
+// Chama Calculator::calculate(), que realiza a operação
+// requerida pelo botão de operação requerido.
+void Calculator::equalMode() {
     calculate();
-    m_isEqual = true;
     setAllOp();
     m_currentNumber = 0;
     m_lastResult = 0;
 }
 
-
-void Calculator::additionMode()
-{
+// Método que ativa o modo de adição de dois operadores,
+// após pressioar o botão [+]
+void Calculator::additionMode() {
     calculate();
     m_isAdding = true;
 }
 
-void Calculator::subtractionMode()
-{
+// Método que ativa o modo de subtração de dois operadores,
+// após pressioar o botão [-]
+void Calculator::subtractionMode() {
     calculate();
     m_isSubtracting = true;
 }
 
+// Método que ativa o modo de multiplicação de dois operadores,
+// após pressioar o botão [x]
 void Calculator::multiplicationMode() {
     calculate();
     m_isMultiplying = true;
 }
 
+// Método que ativa o modo de divisão de dois operadores,
+// após pressioar o botão [:]
 void Calculator::divisionMode() {
     calculate();
     m_isDividing = true;
 }
 
+// Método que ativa o modo de raiz quadrada do operador,
+// após pressioar o botão [sqrt]
 void Calculator::sqrtMode() {
     calculate();
     m_isSqrting = true;
 }
 
+// Método que ativa o modo potência de 2 do operador,
+// após pressioar o botão [x²]
 void Calculator::squareMode() {
     calculate();
     m_isSquaring = true;
 }
 
+// Método que ativa o modo potência de 3 do operador,
+// após pressioar o botão [x³]
 void Calculator::cubeMode() {
     calculate();
     m_isCubing = true;
 }
 
+// Método que ativa o modo exponencial de dois operadores,
+// após pressioar o botão [x^y]
 void Calculator::exponentMode() {
     calculate();
     m_isExponenting = true;
 }
 
+// Método que ativa o modo de seno de um número em rad,
+// após pressioar o botão [sin(x)]
 void Calculator::sinMode() {
     calculate();
     m_isSining = true;
 }
 
+// Método que ativa o modo de cosseno de um número em rad,
+// após pressioar o botão [cos(x)]
 void Calculator::cosMode() {
     calculate();
     m_isCosing = true;
 }
 
+// Método que ativa o modo de tangente de um número em rad,
+// após pressioar o botão [tg(x)]
 void Calculator::tgMode() {
     calculate();
     m_isTangenting = true;
 }
 
+// Método que ativa o modo logaritmo neperiano do operador,
+// após pressioar o botão [ln(x)]
 void Calculator::neperlogMode() {
     calculate();
     m_isNeperloging = true;
 }
 
+// Método que ativa o modo logaritmo na base 10 do operador,
+// após pressioar o botão [log(x)]
 void Calculator::logMode() {
     calculate();
     m_isLoging = true;
 }
 
+// Método que ativa o modo exp do operador,
+// após pressioar o botão [e^x]
 void Calculator::neperexpMode() {
     calculate();
     m_isNeperexping = true;
 }
 
-void Calculator::calculate()
-{
+// Método chamado para realizar a operação ativada por
+// um dos métodos implementados acima. Testa a condição para
+// saber qual operação deve ser realizada, e coloca o resultado
+// em uma variável de memória (m_lastResult).
+// Após os cálculos realizados, se o botão [=] for pressionado,
+// a memória é limpa, indicando um "recomeço" do programa.
+void Calculator::calculate() {
     if(m_isAdding)  m_lastResult += m_currentNumber;
     else if(m_isSubtracting)    m_lastResult -= m_currentNumber;
     else if(m_isMultiplying)    m_lastResult *= m_currentNumber;

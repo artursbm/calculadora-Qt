@@ -11,14 +11,20 @@ public:
     explicit Calculator(QObject *parent = 0);
 
 public slots:
+    // Método para colocar números clicados na tela EntryScreen
     void numEntered(QString);
-    void constEntered(QString);
-    //void decimalMode(QString);
+    //void constEntered(QString);
 
+    // Método para limpar a tela
     void clear();
+
+    // Método para limpar a tela e a memória
     void allClear();
+
+    // Método acionado quando o botão [=] é pressionado
     void equalMode();
 
+    // Métodos matemáticos respectivos aos botões pressionados
     void additionMode();
     void subtractionMode();
     void multiplicationMode();
@@ -34,6 +40,8 @@ public slots:
     void logMode();
     void neperexpMode();
     void signalMode();
+
+    // Método chamado ao fim de cada operação feita
     void calculate();
 
 signals:
