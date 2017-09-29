@@ -109,7 +109,7 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
     m->setMapping(ui->buttonDecimal,".");
 
     connect(ui->buttonDecimal_2, SIGNAL(clicked()), m,SLOT(map()));
-    m->setMapping(ui->buttonDecimal,".");
+    m->setMapping(ui->buttonDecimal_2,".");
 
 
 
@@ -142,7 +142,7 @@ CalculatorInterface::CalculatorInterface(QWidget *parent) :
     connect(ui->buttonDivide_2, SIGNAL(clicked()),
         m_calculator, SLOT(divisionMode()));
 
-    //Funções científicas do modo científico:
+    //Funções do modo científico:
     connect(ui->buttonSqrt, SIGNAL(clicked()),
         m_calculator, SLOT(sqrtMode()));
 
